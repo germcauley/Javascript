@@ -1,11 +1,17 @@
 .square{
 	min-width: 5em;
-	min-height: 5em;
+	min-height: 10em;
 	background-color:#ffffff;
 	border:1px solid black;
+	border-radius: 10px;
 	text-align: center;	
+	
 }
 
+.container{
+	margin:0 auto;
+	padding:40px;
+}
 
 
 li{
@@ -13,7 +19,16 @@ li{
 }
 
 
+
+
 .main {
    	
     color: red;
+}
+
+span{
+	min-width: 80px;
+	min-height: 80px;
+	font-size: 80px;
+	
 }

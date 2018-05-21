@@ -1,11 +1,15 @@
 .square{
-	min-width: 5em;
-	min-height: 10em;
-	background-color:#ffffff;
+
+	min-width: 8em;
+	min-height: 8em;
+	max-width: 10em;
+	max-height: 10em;
+	background-color:#DAE5E8;
 	border:1px solid black;
 	border-radius: 10px;
-	text-align: center;	
-	
+	text-align: center;
+	padding: 10px;
+
 }
 
 .container{
@@ -19,10 +23,7 @@ li{
 }
 
 
-
-
 .main {
-   	
     color: red;
 }
 
@@ -30,5 +31,5 @@ span{
 	min-width: 80px;
 	min-height: 80px;
 	font-size: 80px;
-	
+
 }

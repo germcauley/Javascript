@@ -1,42 +1,65 @@
-var players,pSymbol,comSymbol,ans,moves=0,win=false;
+var players,p1Symbol,p2Symbol,comSymbol,ans,moves=1,win=false,turn=1;
 
 //PLAYER NUMBER SELECTION
 $(".player").click(function(){
     players=(this.innerHTML);
     //console.log(players);
-}); 
+});
 
 //WHEN SYMBOL IS SELECTED
 $(".symbol").click(function(){
-    pSymbol=(this.innerHTML);
-    if(pSymbol=='X'){
+    p1Symbol=(this.innerHTML);
+    if(p1Symbol=='X'){
+    	p2Symbol='O';
     	comSymbol='O';
     }else{
     	comSymbol='X';
+    	p2Symbol='X';
     }
-}); 
+});
 
 //WHEN SQUARE IS CLICKED
 $(".square").click(function(){
 
 		//make sure players and symbol are selected
-		if(!pSymbol ||!players){
+		if(!p1Symbol ||!players){
 			alert("choose number of players and a symbol first");
 		}else if(players==2){
-			//TO DO
+			if(turn==1){
+				playerMove(this);
+				turn=2;
+        		winConditions();
+			}else{
+				playerTwoMove(this);
+				turn=1;
+       			winConditions();
+				}
+			
 		}
 		else{
+
 			playerMove(this);
 			//get coordinates of player move;
 			ans = playerMove(this);
 			//use as parameters for computer move
-			computerPlayer(ans[0],ans[1]);
-			moves++;
-		}
-
+				if(moves<=4){
+					computerPlayer(ans[0]);
+					winConditions();
+					moves++;
+				}
+			winConditions();
+			
+			}
 		//CHECK IF THERE IS A WINNER
-		winConditions();
-		
+});
+
+$(".reset").click(function(){
+	for(var i=1; i<=9; i++){
+ 		var id = i.toString();
+ 		document.getElementById(id).innerHTML="";
+ 	}
+ 	location.reload();
+
 });
 
 
@@ -54,50 +77,51 @@ function winConditions(){
 		var sq7 = document.getElementById('7').innerHTML;
 		var sq8 = document.getElementById('8').innerHTML;
 		var sq9 = document.getElementById('9').innerHTML;
-		
+
 		//WIN_CONDITIONS
 		//HORIZONTAL
 		if(sq1==sq2&&sq2==sq3){
 			//make sure it has symbol and isnt blank
 			if(sq1!=""){
-				resetGame(sq1);
-				}			
+				resetGame();
+        console.log(sq1);
+				}
 		}
 		else if(sq4==sq5&&sq5==sq6) {
 			if(sq4!=""){
-				resetGame(sq4);
+				resetGame();
 				}
 		}
 		else if(sq7==sq8&&sq8==sq9) {
 			if(sq7!=""){
-				resetGame(sq7);
+				resetGame();
 				}
 		}
 		//VERTICAL
 		else if(sq1==sq4&&sq4==sq7) {
 			if(sq1!=""){
-				resetGame(sq1);
+				resetGame();
 				}
 		}
 		else if(sq2==sq5&&sq5==sq8) {
 			if(sq2!=""){
-				resetGame(sq2);
+				resetGame();
 				}
 		}
 		else if(sq3==sq6&&sq6==sq9) {
 			if(sq3!=""){
-				resetGame(sq3);
+				resetGame();
 				}
 		}
 		//DIAGONAL
 		else if(sq1==sq5&&sq5==sq9) {
 			if(sq1!=""){
-				resetGame(sq1);
+				resetGame();
 				}
 		}
 		else if(sq3==sq5&&sq5==sq7) {
 			if(sq3!=""){
-				resetGame(sq3);
+				resetGame();
 				}
 		}
 }
@@ -106,21 +130,24 @@ function winConditions(){
 
 function playerMove(i){
 			//add player symbol to square
-			i.innerHTML=pSymbol;
-			
+			i.innerHTML='<div id="play"style="font-size:50px; height:100%; background-color:yellow; border-radius:60px; padding:15px;">'+p1Symbol+'</div>';
+
 			var sqPos = i.id;
 			//CHECK IF WINNER
-			winConditions()
-			
+			//winConditions();
 			//out put player position coordinates to computer and place +1 to player poisition
 			var coordinates=[];
 			coordinates.push(sqPos);
 			return coordinates
 }
 
+function playerTwoMove(i){
+		i.innerHTML='<div id="play2"style="font-size:50px; height:100%; background-color:blue; border-radius:60px; padding:15px;">'+p2Symbol+'</div>';
+		//winConditions()
+}
+
 function computerPlayer(square){
-		
-								
+
 		//random num between 1 and 9
 		var rnd = (Math.floor((Math.random() * 9) + 1)).toString();
 		console.log("rand is "+rnd);
@@ -128,7 +155,6 @@ function computerPlayer(square){
 		var sqId = square;
 		//get content of a sqaure to see if empty
 		var squareContent = document.getElementById(rnd).innerHTML;
-
 		var comPlace =false;
 		console.log(squareContent);
 
@@ -137,30 +163,33 @@ function computerPlayer(square){
 				console.log("square content is "+squareContent);
 				console.log("User move was "+sqId);
 				console.log("Placing Computer at "+rnd);
+				var rndID = rnd.toString();
 				//put computer symbol in square
-				$("#"+rnd).text(comSymbol);
+				//$("#"+rnd).text(comSymbol);
+				document.getElementById(rndID).innerHTML='<div id="com" style="font-size:50px; height:100%; background-color:blue; border-radius:60px; padding:15px;">'+comSymbol+'</div>';
 				comPlace=true;
 				//CHECK IF ANY WINNER
 				winConditions();
-				break;
-			}	
+				
+			}
 			else{
 				console.log("problem"+squareContent);
 				//re-roll random
 				rnd =(Math.floor((Math.random() * 9) + 1)).toString();
 				squareContent = document.getElementById(rnd).innerHTML;
+				
 			}
-		}		
+		}
  }
 
 //CLEAR BOARD AND SHOW WINNER MES
- function resetGame(winSymbol){
+ function resetGame(){
  	win=true;
- 	alert(winSymbol+" is the Winner!");
+ 	alert("Winner!");
+ 	//CLEAR THE BOARD
  	for(var i=1; i<=9; i++){
  		var id = i.toString();
  		document.getElementById(id).innerHTML="";
  	}
- 	location.reload(); 
+ 	location.reload();
  }
-

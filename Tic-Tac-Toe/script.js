@@ -130,7 +130,7 @@ function winConditions(){
 
 function playerMove(i){
 			//add player symbol to square
-			i.innerHTML='<div id="play"style="font-size:50px; height:100%; background-color:yellow; border-radius:60px; padding:15px;">'+p1Symbol+'</div>';
+			i.innerHTML='<div id="play"style="font-size:2em; height:100%; background-color:yellow; border-radius:60px; padding:5px;">'+p1Symbol+'</div>';
 
 			var sqPos = i.id;
 			//CHECK IF WINNER
@@ -142,7 +142,7 @@ function playerMove(i){
 }
 
 function playerTwoMove(i){
-		i.innerHTML='<div id="play2"style="font-size:50px; height:100%; background-color:blue; border-radius:60px; padding:15px;">'+p2Symbol+'</div>';
+		i.innerHTML='<div id="play2"style="font-size:2em; height:100%; background-color:blue; border-radius:60px; padding:5px;">'+p2Symbol+'</div>';
 		//winConditions()
 }
 
@@ -166,7 +166,7 @@ function computerPlayer(square){
 				var rndID = rnd.toString();
 				//put computer symbol in square
 				//$("#"+rnd).text(comSymbol);
-				document.getElementById(rndID).innerHTML='<div id="com" style="font-size:50px; height:100%; background-color:blue; border-radius:60px; padding:15px;">'+comSymbol+'</div>';
+				document.getElementById(rndID).innerHTML='<div id="com" style="font-size:2em; height:100%; background-color:blue; border-radius:60px; padding:5px;">'+comSymbol+'</div>';
 				comPlace=true;
 				//CHECK IF ANY WINNER
 				winConditions();

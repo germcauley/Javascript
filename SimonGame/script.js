@@ -1,7 +1,8 @@
- var steps=0,counter=0;
- var stepsArr=[];
- var guessArr=[];
- var click =1;
+ var steps=0;
+ var counter=0;//tracks how many steps shown by game
+ var stepsArr=[];//store steps
+ var guessArr=[];//player guesses to compare against
+ var x =0;//index of steps array
 
 
 
@@ -35,13 +36,13 @@
 	 		//highlight random quarter using id
 	 		$('#'+rndStr).toggleClass('tog', 100).toggleClass('tog', 300);
 	 		//console.log("counter is :"+counter);
-	 		counter--;
+	 		counter--;//countdown
 	 		//console.log("counter is :"+counter);
 	 	}
 	 	else{
 	 		//STOP HIGHLIGHT INTERVAL
 			clearInterval(highlightInterval);
-			alert("Try to input the steps");
+			//alert("Try to input the steps");
 			console.log(stepsArr);
 			//ALLOW PLAYER TO CLICK AND STORE ID OF QUARTERS CLICKED
 			playerInput();
@@ -58,41 +59,56 @@
 
 
 function playerInput(){
-	//Only allow if there is data in steps array
 	$('.quarter').click(function(){
-		//send id of clicked quarter to guess array
-		guessArr.push(this.id);
+		
 
-		//if guessArr is same length as steps and they match show message
-		for(var i=0; i<guessArr.length; i++){
+		//run until guess array is same content as steps array
+			//compare player guess to index in step array
 
-			//IF PLAYER GETS PATTERN CORRECT
-			if(stepsArr.length==guessArr.length){
-				for(var j=0; j<stepsArr; j++){
-					if(stepsArr[i]==guessArr[i]){
-						console.log('match, you win!');
-						guessArr=[];
-						stepsArr=[];
-						steps++;
-						counter=steps;
-						stepHighlight();
-					}
+			//IF CLICKED QUARTER MATCHES STEP
+			if(stepsArr[x]==this.id){
+				//DEBUG REPEATING NUMBERS AND GUESSES !!!!!!!!!!
+				console.log("X is "+x);
+				console.log("stepsx is"+stepsArr[x]);
+				console.log("this id is "+this.id);
+				console.log("You guessed: "+this.id);
+				//add guess to array
+				guessArr.push(this.id);
+				console.log("guess arr "+ guessArr)
+				//if match and arrays are same length/content
+				//elif they match and not same length arrays
+				if(stepsArr.length!=guessArr.length){
+					//Increment x and test next step
+					x++;
+					console.log("!!!!!!!!take next guess");
 				}
+				else if(stepsArr.length==guessArr.length){
+					console.log("!!!!!!!arrays match! steps is: "+stepsArr+" and guess is :"+guessArr);
+					steps++;//update text for steps
+					counter=steps;//update counter
+					//clear arrays
+					stepsArr=[];
+					console.log("reset steps");
+					console.log(stepsArr);
+					guessArr=[];
+					console.log("reset guess");
+					console.log(guessArr);
+					//reset X
+					x=0;
+					//update steps text
+					$("#count").html(steps.toString());
+					console.log("steps are "+steps);
+					console.log("counter is "+counter);
+
+					stepHighlight();
+					
+				}
+				
+
 			}
-			//IF PLAYER MATCHES ONE NUMBER
-			else if(stepsArr[i]==guessArr[i]&&stepsArr.length!=guessArr.length){
-				console.log('match');
-				console.log(guessArr);
-			}
-			else{
-				//IF PLAYER MAKES A MISTAKE CLEAR ARRAY
-				console.log('no match');
-				guessArr=[];
-			}
-		}
-		//else if guessArr is same length and they dont match show message
-		// console.log("Com is :"+stepsArr);
-		// console.log("Player guess is :"+guessArr);
+			
+
+			
 	});
 }
 

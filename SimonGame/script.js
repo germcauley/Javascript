@@ -1,4 +1,4 @@
- var steps=3,counter=2;
+ var steps=0,counter=0;
  var stepsArr=[];
  var guessArr=[];
  var click =1;
@@ -11,7 +11,9 @@
 
 //CLICK START BUTTON, CALL HIGHLIGHT FUNCTION
     $("#start").click(function(){
-        $("#count").html("1");
+    	counter=1;
+    	steps=1;
+        $("#count").html(steps.toString());
          stepHighlight();
 
         
@@ -20,6 +22,7 @@
 
 //HIGHLIGHT QUARTERS AND COUNTS STEPS
 	 function highlight(){
+	 	
 	 	if(counter>0){
 	 		//create random number
 	 		var rnd = Math.floor((Math.random() * 4) + 1).toString();
@@ -57,23 +60,39 @@
 function playerInput(){
 	//Only allow if there is data in steps array
 	$('.quarter').click(function(){
+		//send id of clicked quarter to guess array
 		guessArr.push(this.id);
 
 		//if guessArr is same length as steps and they match show message
-		for(var i=0; i<click; i++){
-			if(stepsArr[i]==guessArr[i]){
-				console.log("steps is :"+stepsArr[i]);
-				console.log("guess is :"+guessArr[i]);
+		for(var i=0; i<guessArr.length; i++){
+
+			//IF PLAYER GETS PATTERN CORRECT
+			if(stepsArr.length==guessArr.length){
+				for(var j=0; j<stepsArr; j++){
+					if(stepsArr[i]==guessArr[i]){
+						console.log('match, you win!');
+						guessArr=[];
+						stepsArr=[];
+						steps++;
+						counter=steps;
+						stepHighlight();
+					}
+				}
+			}
+			//IF PLAYER MATCHES ONE NUMBER
+			else if(stepsArr[i]==guessArr[i]&&stepsArr.length!=guessArr.length){
 				console.log('match');
+				console.log(guessArr);
 			}
 			else{
-				console.log("steps is :"+stepsArr[i]);
-				console.log("guess is :"+guessArr[i]);
+				//IF PLAYER MAKES A MISTAKE CLEAR ARRAY
 				console.log('no match');
+				guessArr=[];
 			}
 		}
 		//else if guessArr is same length and they dont match show message
-		console.log(guessArr);
+		// console.log("Com is :"+stepsArr);
+		// console.log("Player guess is :"+guessArr);
 	});
 }
 

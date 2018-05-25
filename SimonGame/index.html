@@ -4,6 +4,8 @@
 	<title>Simon_Game</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet"> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 	
@@ -20,14 +22,18 @@
 	<div class="center">
 		<p class="title">Simon</p>
 		<div class="row">
-			<div class="col-xs-4 x "><button id="start">y</button>Start</div>
-			<div class="col-xs-4 x"><p id="count">x</p>Count</div>
-			<div class="col-xs-4 x"><button id="strict">z</button>Strict</div>
+			<div class="col-xs-4">
+				<button class="btn btn-outline-secondary"id="start">Start</button>
+			</div>
+			<div class="col-xs-4" id="countParent"><p id="count">_</p></div>
+			<div class="col-xs-4">
+				<button class="btn btn-outline-danger"id="strict">Strict</button>
+			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-4 x"></div>
-			<div class="col-xs-4 x"><button id="on">switch</button>On/Off</div>
-			<div class="col-xs-4 x"></div>
+			<div class="col-xs-4"></div>
+			<div class="col-xs-4"><button class="btn btn-primary" id="on">On/Off</button></div>
+			<div class="col-xs-4"></div>
 		</div>
 	</div>
 </div>

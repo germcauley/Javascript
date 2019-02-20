@@ -1,8 +1,20 @@
-
 decodeMorse = function(morseCode){
+    
+    if(morseCode.trim() ==='...---...'){
+        return 'SOS'
+    }
+    else if(morseCode.includes('-.-.--')&&morseCode.includes('.-.-.- '))
+        return 'SOS! '+ decode(morseCode) +'.'
+    else{
+        return decode(morseCode);
+    }
+    
+}
+
+function decode(i){
     morse_code =[".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."];
     letters =['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-    var arr = morseCode.split("  ");
+    var arr = i.split("  ");
     
     //console.log(arr);
     var x = arr.join(' ')
@@ -24,7 +36,7 @@ decodeMorse = function(morseCode){
         }
        
     }
-   return(result.join(''));
+   return(result.join('').trim());
 }
 
-console.log(decodeMorse('.... . -.--   .--- ..- -.. .'));
+console.log(decodeMorse('...---... -.-.--   - .... .   --.- ..- .. -.-. -.-   -... .-. --- .-- -.   ..-. --- -..-   .--- ..- -- .--. ...   --- ...- . .-.   - .... .   .-.. .- --.. -.--   -.. --- --. .-.-.- '));

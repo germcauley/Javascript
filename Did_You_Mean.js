@@ -17,36 +17,74 @@ function Dictionary(words) {
     // TODO: this is your task ;)
     const word = createObject(term);
     const wordKeys= Object.keys(word)
-    var matchArr=[];
+    var matches =0; //number of matches
+    var matchWord ='';
+    var matchWordCount =0;
 
     //for loop for length of dictionary
     for(var i =0; i < this.words.length; i++){
-        console.log(this.words[i]);//array word
-        console.log(createObject(this.words[i]));//array key/values
-        //create object from array index
-        let index = createObject(this.words[i]);
-        //get keys of the object
-        let indArr = Object.keys(index);
-        //keys in input word
-        //console.log(wordKeys);
-        console.log(term);//input term
-        console.log(word);//input key/values
-        //keys in dictionary index
-        //console.log(indArr);
-        console.log("-------------------");
+      
+        var arrayWord = this.words[i];
+        //console.log(arrayWord);//array word
+        //console.log(createObject(arrayWord));//array key/values
 
-        //compare keys of each object
-        
-       
+        //create object from array index, this is current word from array
+        let index = createObject(arrayWord);
+        //get keys of the object
+        //let indArr = Object.keys(index);
+
+        // console.log('------------------------------NEW WORDS----------------------');
+        // console.log(term);//input term
+        // console.log(word);//input key/values
+        // console.log(arrayWord);
+        // console.log(index);
+        // //keys in dictionary index
+        // //console.log(indArr);
+        // console.log("-------------------");
+
+        //run for each key in word
+       for(var p in word){ 
+         //run over each key in index, compare with word keys
+        //  console.clear()
+        //  console.log('Comparing '+ p + ' '+word[p]+' with...... ');
+         for(var q in index){
+            // console.log(q+' '+index[q]);
+           if(p === q){
+            // console.log('MATCH!');
+            matches +=1;
+            break;
+           }
+         }
+         
+       } 
+       if(matches >matchWordCount ){
+          matchWord = arrayWord;
+          matchWordCount = matches;
+          // console.log('NEW MATCH WORD '+ matchWord);
+          // console.log('MATCHING LETTER COUNT '+matchWordCount);
+     }
+     else if(matches == matchWordCount ){
+         
+      if(arrayWord.length< matchWord.length){
+       matchWord = arrayWord;
+       matchWordCount = matches;
+       // console.log('NEW MATCH WORD '+ matchWord);
+       // console.log('MATCHING LETTER COUNT '+matchWordCount);
+      }
+      else if(matchWordCount == 0){
+       matchWord = arrayWord;
+       matchWordCount = matches;
+       // console.log('NEW MATCH WORD '+ matchWord);
+       // console.log('MATCHING LETTER COUNT '+matchWordCount);
+      }
+  }
+       var matches =0;//reset for next word in array
+
     }
-    return 'hello';
+    return matchWord;
     
     
   }
-
-// Create object to index occurences of letters in input
-// Run same code on each word from dictionary array and use the one with most matches
-
 
 //Break word into an object with occurences of letters counted
 function createObject(input){
@@ -64,8 +102,9 @@ function createObject(input){
 }
 
 
-things = new Dictionary(['stars', 'mars', 'wars', 'codec', 'codewars']);
-console.log(things.findMostSimilar('coddwars')); 
+languages = new Dictionary(['cherry', 'pineapple', 'melon', 'strawberry', 'raspberry']);
+// things = new Dictionary(['stars']);
+console.log(languages.findMostSimilar('berry')); 
 
 
 

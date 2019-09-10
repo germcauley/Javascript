@@ -1,25 +1,25 @@
 function autocomplete(input, dictionary){
     //get length of word
     len = (input.length)-1;
-    
-     console.log(input.length);
-     console.log(len);
+    //Each word in dictionary
+    resultArr =[];
     for(var j=0; j <dictionary.length; j++){
-        var match = false
-        console.log(dictionary[j]);
+        var match = false 
+        //letter 1, 2 in word
         for(var i = 0; i <= len; i++){
             if(dictionary[j][i] !== input[i]){
-                console.log('No match!')
+                match = false;
+                break
             }
             else{
-                console.log(dictionary[j][i]);
-            }
-            
+                match = true;
+            }   
+        }
+        if(match == true){
+            resultArr.push(dictionary[j])
         }
     }
-     
-
-    //test len of word against each word index
+    return(resultArr)
 }
 
 
@@ -34,7 +34,7 @@ function autocomplete(input, dictionary){
 
 
 
-autocomplete('he',['hello','hellicopter','happy','not'])
+autocomplete('ai', ['airplane','airport','apple','ball'])
 
 
 
